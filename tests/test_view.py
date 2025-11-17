@@ -23,7 +23,7 @@ def db():
             with conn.cursor() as cur:
                 cur.execute(f.read())
 
-    with open(sql_dir / "03_queries.sql", "r") as f:
+    with open(sql_dir / "03_queries_data.sql", "r") as f:
         raw_queries = f.read()
 
     yield conn, raw_queries
