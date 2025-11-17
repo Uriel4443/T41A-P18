@@ -37,42 +37,45 @@ def run_query(conn, query):
             return cur.fetchall()
         except:
             return None
-          
+
+
 def extract_query(raw_sql, index):
-    parts = raw_sql.strip().split(";")
-    return parts[index].strip() + ";"
+    parts = [q.strip() for q in raw_sql.split(";") if q.strip() != ""]
+    return parts[index] + ";"
+
 
 def test_productos_tecnologia(db):
     conn, raw_queries = db
 
-    query = extract_query(raw_queries, 0) 
+    query = extract_query(raw_queries, 0)
     result = run_query(conn, query)
 
-    nombres = [r[0] for r in result]
+    nombres = [row[0] for row in result]
 
     assert "PC" in nombres
     assert "Moto" in nombres
     assert "Sofa" not in nombres
+
+
 def test_empleados_recursivos(db):
     conn, raw_queries = db
 
-    query = extract_query(raw_queries, 1) 
+    query = extract_query(raw_queries, 1)
     result = run_query(conn, query)
 
-    nombres = [r[1] for r in result] 
+    nombres = [row[1] for row in result]
 
     assert "Uriel" in nombres
     assert "María" in nombres
 
+
 def test_ciudades_alcanzables(db):
     conn, raw_queries = db
 
-    query = extract_query(raw_queries, 2)  
+    query = extract_query(raw_queries, 2)
     result = run_query(conn, query)
 
-    nombres = [r[0] for r in result]
+    nombres = [row[0] for row in result]
 
     assert "San Luis Potosí" in nombres
     assert len(nombres) > 1
-
-
