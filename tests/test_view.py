@@ -16,7 +16,7 @@ def db():
     conn = psycopg2.connect(**DB_CONFIG)
     conn.autocommit = True
 
-    sql_dir = Path("sql")
+    sql_dir = Path(".")
 
     for file in ["01_create_tables.sql", "02_insert_data.sql"]:
         with open(sql_dir / file, "r") as f:
