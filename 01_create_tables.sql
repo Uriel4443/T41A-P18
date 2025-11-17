@@ -8,11 +8,11 @@ CREATE TABLE productos (
     etiquetas TEXT[]
 );
 
-INSERT INTO empleados (nombre, jefe_id) VALUES
-('Uriel', NULL),
-('Fernanda', 3),
-('María', 1),
-('Alejandro', 3);
+CREATE TABLE empleados  (
+    id SERIAL PRIMARY KEY,
+    nombre TEXT,
+    jefe_id INT
+);
 
 CREATE TABLE ciudades (
     id SERIAL PRIMARY KEY,
